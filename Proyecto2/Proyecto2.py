@@ -6,7 +6,7 @@ import pyassimp
 import numpy
 
 pygame.init()
-pygame.display.set_mode((3000,2000), pygame.OPENGL | pygame.DOUBLEBUF)
+pygame.display.set_mode((800,600), pygame.OPENGL | pygame.DOUBLEBUF)
 clock = pygame.time.Clock()
 pygame.key.set_repeat(1,10)
 
@@ -19,6 +19,7 @@ vertex_shader = """
 layout (location = 0) in vec4 position;
 layout (location = 1) in vec4 normal;
 layout (location = 2) in vec2 texcoords;
+
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
@@ -29,17 +30,19 @@ uniform vec4 light;
 out vec4 vertexColor;
 out vec2 vertexTexcoords;
 
-void main()
-{
+void main(){
+
     float intensity = dot(normal, normalize(light - position));
     gl_Position = projection * view * model * position;
     vertexColor = color * intensity;
     vertexTexcoords = texcoords;
+
 }
 """
 
 fragment_shader = """
 #version 330
+
 layout (location = 0) out vec4 diffuseColor;
 
 in vec4 vertexColor;
@@ -47,9 +50,10 @@ in vec2 vertexTexcoords;
 
 uniform sampler2D tex;
 
-void main()
-{
+void main(){
+
     diffuseColor = vertexColor * texture(tex, vertexTexcoords);
+
 }
 """
 
@@ -63,19 +67,19 @@ glUseProgram(shader)
 
 model = glm.mat4(1)
 view = glm.mat4(1)
-projection = glm.perspective(glm.radians(45),3000/2000,0.1,1000.0)
+projection = glm.perspective(glm.radians(45),800/600,0.1,1000.0)
 
 
-scene = pyassim.load('./modelos/Nectarins-peaches_obj.obj')
+
 
 def glize(node,x,y,z):
     model = node.transformation.astype(numpy.float32)
+    model = glm.translate(glm.mat4(model.tolist()),glm.vec3(x,y,z))
     for mesh in node.meshes:
         
         material = dict(mesh.material.properties.items())
         print(material)
-        texture = material['file'][2:]
-        
+        texture = material['file']#[2:]
         texture_surface = pygame.image.load('./models/'+texture)
         texture_Data = pygame.image.tostring(texture_surface,"RGB",1)
         width = texture_surface.get_width()
@@ -124,7 +128,7 @@ def glize(node,x,y,z):
         diffuse = mesh.material.properties["diffuse"]
 
         glUniform4f(
-            glGetUniformLocation(shader, "color"), diffuse,1
+            glGetUniformLocation(shader, "color"), *diffuse,1
         )
 
         glUniform4f(
@@ -148,10 +152,10 @@ def process_input():
         if event.type == pygame.KEYDOWN:
             if event.type == pygame.K_LEFT:
                 camera.x += camera_speed
-                
+                #camera.z += camera_speed
             if event.key == pygame.K_RIGHT:
                 camera.x -= camera_speed
-                
+                #camera.z -= camera_speed
             if event.key == pygame.K_UP:
                 camera.y += camera_speed
             if event.key == pygame.K_DOWN:
@@ -161,7 +165,8 @@ done = False
 while not done:
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
     view = glm.lookAt(camera, glm.vec3(0,0,0), glm.vec3(0,1,0))
-    glize(scene.rootnode)
+    scene = pyassimp.load('./modelos/Nectarins-peaches_obj.obj')
+    glize(scene.rootnode,0,0,100)
 
     done = process_input()
     clock.tick(15)
