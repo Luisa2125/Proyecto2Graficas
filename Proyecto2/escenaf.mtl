@@ -1,0 +1,71 @@
+# Blender MTL File: 'escena.blend'
+# Material Count: 6
+
+newmtl Material.001
+Ns 92.156863
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\1\Documents\banana\banana.png
+
+newmtl QuadMesh1
+Ns 9.803922
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd modelos\appleD.jpg
+map_Bump C:\\Users\\LUISA\\Downloads\\fruits\\apple_textured_obj\\textures\\appleN.jpg
+
+newmtl Skin
+Ns 249.019608
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 0.689344 0.154515
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd modelos\Color.jpg
+map_Bump C:\\Users\\LUISA\\Downloads\\fruits\\Orange_obj\\Normal.jpg
+
+newmtl Skin.001
+Ns 249.019608
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 1.000000 0.689344 0.154515
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd modelos\Color.jpg
+map_Bump C:\\Users\\LUISA\\Downloads\\fruits\\Orange_obj\\Normal.jpg
+
+newmtl Stub
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd modelos\Color.jpg
+
+newmtl Stub.001
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd modelos\Color.jpg
