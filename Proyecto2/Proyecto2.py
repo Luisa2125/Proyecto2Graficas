@@ -80,7 +80,7 @@ def glize(node,x,y,z):
         material = dict(mesh.material.properties.items())
         print(material)
         texture = material['file']#[2:]
-        texture_surface = pygame.image.load('./models/'+texture)
+        texture_surface = pygame.image.load('./modelos/'+texture)
         texture_Data = pygame.image.tostring(texture_surface,"RGB",1)
         width = texture_surface.get_width()
         height = texture_surface.get_height()
@@ -165,7 +165,7 @@ done = False
 while not done:
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
     view = glm.lookAt(camera, glm.vec3(0,0,0), glm.vec3(0,1,0))
-    scene = pyassimp.load('./modelos/escenaf.obj')
+    scene = pyassimp.load('./modelos/Nectarins-peaches_obj.obj')
     glize(scene.rootnode,0,0,100)
 
     done = process_input()
